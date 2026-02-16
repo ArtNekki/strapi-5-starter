@@ -12,8 +12,9 @@ module.exports = ({ env }) => ({
       // password: env('DATABASE_PASSWORD'),
       // SSL enabled by default for production
       ssl: env.bool('DATABASE_SSL', true) && {
-        ca:
-          env('DATABASE_SSL_CA') || require('fs').readFileSync('/opt/app/certs/ca.crt').toString(),
+        // Doppler (and some CI systems) may encode PEM newlines as literal `\n`
+        // Normalize so node-postgres receives a valid PEM string.
+        ca: env('DATABASE_SSL_CA')?.replace(/\\n/g, '\n'),
         rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', false),
       },
       schema: env('DATABASE_SCHEMA', 'public'),

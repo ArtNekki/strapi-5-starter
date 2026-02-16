@@ -85,16 +85,13 @@ export PROJECT_VERSION="$ENV"
 # Export vars
 export NODE_ENV
 
-# Set Doppler Config
+# Set Doppler Config (used by doppler run)
 doppler configure set config "$CONFIG_NAME"
-
-# Load Doppler Secrets
-export eval $(doppler secrets download --no-file --format docker)
 
 # Run the application based on the environment
 if [ "$ENV" = "dev" ]; then
   log "INFO" "Running Docker Compose for DEV environment..."
-  docker-compose up
+  doppler run --config "$CONFIG_NAME" -- docker-compose up
 else
   # Determine Docker Compose file
   if [ "$NODE_ENV" = "production" ] && [ -f docker-compose.prod.yml ]; then
@@ -112,14 +109,14 @@ else
   fi
 
   log "INFO" "Building Docker image for $ENV..."
-  docker build \
+  doppler run --config "$CONFIG_NAME" -- docker build \
     --memory=6g \
     --build-arg NODE_ENV="$NODE_ENV" \
-    --build-arg STRAPI_URL="${STRAPI_URL}" \
+    --build-arg STRAPI_URL \
     -t "$DOCKER_USERNAME/$PROJECT_NAME:$PROJECT_VERSION" \
     -f "$DOCKERFILE" .
 
   log "INFO" "Running Docker Compose for environment $ENV..."
 
-  docker-compose "${COMPOSE_FILES[@]}" up
+  doppler run --config "$CONFIG_NAME" -- docker-compose "${COMPOSE_FILES[@]}" up
 fi

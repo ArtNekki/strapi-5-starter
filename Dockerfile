@@ -32,7 +32,7 @@ WORKDIR ${APP_HOME}
 COPY --from=build /opt/app ./
 
 # Copy SSL certificates for database connections
-COPY --from=build /opt/app/certs ./certs
+# COPY --from=build /opt/app/certs ./certs
 
 ENV PATH /opt/node_modules/.bin:$PATH
 
