@@ -35,7 +35,6 @@ services:
       PROJECT_VERSION: ${PROJECT_VERSION}
       NODE_ENV: ${NODE_ENV:-production}
     volumes:
-      - ./.env:/opt/app/.env
       - strapi-public:/opt/app/public
     ports:
       - '1337:1337'
