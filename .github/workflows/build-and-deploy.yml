@@ -90,7 +90,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: 'docker-compose.yml,.env'
+          source: 'docker-compose.yml'
           target: '~/opt/app'
 
       - name: Copy docker-compose files to server (production)
@@ -100,7 +100,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: 'docker-compose.prod.yml,.env'
+          source: 'docker-compose.prod.yml'
           target: '~/opt/app'
 
       - name: Deploy to server

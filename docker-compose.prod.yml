@@ -5,7 +5,6 @@ services:
     image: ${DOCKER_USERNAME:-docker}/${PROJECT_NAME:-strapi-starter}:${PROJECT_VERSION:-latest}
     container_name: ${PROJECT_NAME}
     restart: always
-    env_file: .env
     environment:
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
