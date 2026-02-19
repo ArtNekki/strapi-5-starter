@@ -118,7 +118,7 @@ jobs:
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
           DATABASE_SSL: ${{ secrets.DATABASE_SSL }}
-          DATABASE_SSL_CA: ${{ secrets.DATABASE_SSL_CA }},
+          DATABASE_SSL_CA: ${{ secrets.DATABASE_SSL_CA }}
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_SSL_REJECT_UNAUTHORIZED: ${{secrets.DATABASE_SSL_REJECT_UNAUTHORIZED}}
           DATABASE_URL: ${{secrets.DATABASE_URL}}
